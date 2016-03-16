@@ -18,9 +18,9 @@ class HiddenObject {
     numCtl.addSlider(para)
      .setPosition(this.positionX-60, this.positionY-160)
      .setSize(120, 20)
-     .setRange(0, 2000)
+     .setRange(0, 200)
      .setValue(beats)
-     .setNumberOfTickMarks(21)
+     .setNumberOfTickMarks(41)
      .setColorCaptionLabel(color(20,20,20));
   }
   

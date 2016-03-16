@@ -16,7 +16,11 @@ NetAddress myRemoteLocation;
 boolean enable = false;
 int beats = 0;
 
+// frames per second
+int fps = 60;
+
 void setup() {
+  frameRate(fps);
   size(200, 200);
   noStroke();
 
@@ -29,11 +33,24 @@ void setup() {
 
 void draw() {
   background(255);
+  
+  int period = fps*60/beats;
+  int count = frameCount % period;
+  
+  // Read from sender
   println("ENABLE:", enable);
   println("BEATS:", beats);
   
-  playSound(enable, beats);
-  delay(beats);
+  // Double blinking
+  fill(int(float(count)/period*255));
+  ellipse(60, 100, 20, 20);
+  fill(int((1-float(count)/period)*255));
+  ellipse(140, 100, 20, 20);
+ 
+  // Play sound with Pd
+  if (count == 0) {
+    playSound(enable, beats);
+  }
 }
 
 void handleOOCSIEvent(OOCSIEvent event) {

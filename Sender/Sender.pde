@@ -33,9 +33,9 @@ void setup() {
   // (for more information how to run an OOCSI server refer to: https://iddi.github.io/oocsi/)
   oocsi = new OOCSI(this, "senderName", "localhost");
   
-  object1 = new HiddenObject(120, 200, "enable1", "beats1", 1000, this);
-  object2 = new HiddenObject(400, 200, "enable2", "beats2", 500, this);
-  object3 = new HiddenObject(680, 200, "enable3", "beats3", 200, this);
+  object1 = new HiddenObject(120, 200, "enable1", "beats1", 25, this);
+  object2 = new HiddenObject(400, 200, "enable2", "beats2", 60, this);
+  object3 = new HiddenObject(680, 200, "enable3", "beats3", 120, this);
 }
 
 void draw() {
