@@ -6,7 +6,7 @@
 #X msg 52 110 connect 127.0.0.1 12000;
 #X obj 519 117 dumpOSC 12001;
 #X floatatom 519 297 5 0 0 0 - - -;
-#X floatatom 658 270 5 0 0 0 - - -;
+#X floatatom 576 296 5 0 0 0 - - -;
 #X floatatom 313 117 5 0 0 0 - - -;
 #X floatatom 345 159 5 0 0 0 - - -;
 #X floatatom 378 115 5 0 0 0 - - -;
@@ -28,6 +28,7 @@ button below to activate the connection.;
 #X connect 4 0 1 0;
 #X connect 5 0 2 0;
 #X connect 6 0 19 0;
+#X connect 7 0 19 1;
 #X connect 8 0 16 0;
 #X connect 9 0 13 0;
 #X connect 9 0 16 1;

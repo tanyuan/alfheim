@@ -31,6 +31,9 @@ void draw() {
   background(255);
   println("ENABLE:", enable);
   println("BEATS:", beats);
+  
+  playSound(enable, beats);
+  delay(beats);
 }
 
 void handleOOCSIEvent(OOCSIEvent event) {
@@ -38,12 +41,12 @@ void handleOOCSIEvent(OOCSIEvent event) {
   beats = event.getInt("beats", 0);
 }
 
-void playSound(int note) {
+void playSound(boolean enable, int beats ) {
 
   OscMessage myOscMessage = new OscMessage("/test");
   // add a value (an integer) to the OscMessage
-  myOscMessage.add(note);
-  myOscMessage.add((int) map(mouseY, 0, height, 200, 1000));
+  myOscMessage.add(enable);
+  myOscMessage.add(beats);
   // send the OscMessage to a remote location specified in myNetAddress
   oscP5.send(myOscMessage, myRemoteLocation);  
 }

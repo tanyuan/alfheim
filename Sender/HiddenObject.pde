@@ -5,7 +5,7 @@ class HiddenObject {
   int positionY;
   ControlP5 numCtl;
   
-  HiddenObject(int x, int y, String enable, String para, int node, processing.core.PApplet theParent) {
+  HiddenObject(int x, int y, String enable, String para, int beats, processing.core.PApplet theParent) {
     this.positionX = x;
     this.positionY = y;
  
@@ -18,9 +18,9 @@ class HiddenObject {
     numCtl.addSlider(para)
      .setPosition(this.positionX-60, this.positionY-160)
      .setSize(120, 20)
-     .setRange(2, 16)
-     .setValue(node)
-     .setNumberOfTickMarks(15)
+     .setRange(0, 2000)
+     .setValue(beats)
+     .setNumberOfTickMarks(21)
      .setColorCaptionLabel(color(20,20,20));
   }
   
