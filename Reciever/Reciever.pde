@@ -64,20 +64,15 @@ void draw() {
   fill(fillColor, 120, 120);
   rect(20, position, 20, 20);
 
-  if (frameCount % 18 == 10) 
-    playSound(32);
-  if (frameCount % 6 == 0) 
-    playSound(40 + (frameCount % 10));
-  if (frameCount % 12 == 0) 
-    playSound(40 + (frameCount % 10) + 12);
-  if (frameCount % 16 == 0) 
-    playSound(40 + (frameCount % 10) + 15);
-  if (position > width/2) {
-    if (frameCount % 18 == 0) 
-      playSound(30 + (frameCount % 10) + 26);
-    if (frameCount % 18 == 8) 
-      playSound(30 + (frameCount % 10) + 29);
+  if (position > 100) {
+    playSound(1);
   }
+  else {
+    playSound(0);
+  }
+  
+  delay(1000);
+
 }
 
 void testchannel(OOCSIEvent event) {
@@ -96,5 +91,5 @@ void playSound(int note) {
   myOscMessage.add(note);
   myOscMessage.add((int) map(mouseY, 0, height, 200, 1000));
   // send the OscMessage to a remote location specified in myNetAddress
-  oscP5.send(myOscMessage, myRemoteLocation);
+  oscP5.send(myOscMessage, myRemoteLocation);  
 }

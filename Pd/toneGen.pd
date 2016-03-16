@@ -1,0 +1,74 @@
+#N canvas 182 62 864 618 10;
+#X floatatom 103 75 5 0 0 0 - - -;
+#X obj 416 410 *~;
+#X text 545 434 Author: Martin Peach;
+#X obj 421 558 dac~;
+#X obj 431 358 nbx 5 14 0 1000 0 1 empty empty level 60 8 0 10 -4034
+-13381 -13381 190 256;
+#X obj 431 386 / 1000;
+#X obj 532 377 tabwrite~ \$0-rcoschelp;
+#X obj 532 400 table \$0-rcoschelp;
+#X obj 532 346 metro 100;
+#X obj 532 327 tgl 15 0 empty empty graph 17 7 0 10 -4034 -13381 -1
+0 1;
+#X floatatom 416 161 5 0 0 0 - - -;
+#X text 519 201 7.22057e+07;
+#X text 587 201 70756;
+#X text 511 201 0;
+#X obj 416 138 r note_a;
+#X obj 416 182 mtof;
+#X text 413 76 rcosc~ emulates an oscillator implemented with a capacitor
+charging through a resistor. The creation argument can be overriden
+by the inlet \, and represents a charging time constant in seconds.
+;
+#X text 544 453 2010/04/15;
+#X obj 209 337 cnv 15 100 60 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X obj 241 359 line~;
+#X obj 99 313 trigger bang anything;
+#X obj 241 429 *~;
+#X text 174 215 ramp to 1 in 1 second;
+#X text 212 261 ramp to 1 in 100 ms;
+#X text 230 285 ramp to 0 in 100 ms;
+#X msg 128 275 1 1;
+#X obj 55 153 delay 10;
+#X msg 78 212 1 100;
+#X obj 170 160 delay 100;
+#X obj 39 8 inlet;
+#X msg 118 239 0 200;
+#X obj 278 46 inlet;
+#X obj 274 107 prepend;
+#X msg 221 65 0;
+#X floatatom 359 113 5 0 0 0 - - -;
+#X obj 416 302 osc~ 100;
+#X floatatom 416 242 5 0 0 0 - - -;
+#X connect 0 0 15 0;
+#X connect 0 0 25 0;
+#X connect 0 0 26 0;
+#X connect 0 0 28 0;
+#X connect 1 0 21 1;
+#X connect 4 0 5 0;
+#X connect 5 0 1 1;
+#X connect 8 0 6 0;
+#X connect 9 0 8 0;
+#X connect 10 0 15 0;
+#X connect 14 0 10 0;
+#X connect 15 0 36 0;
+#X connect 19 0 21 0;
+#X connect 20 1 19 0;
+#X connect 21 0 3 0;
+#X connect 21 0 3 1;
+#X connect 25 0 20 0;
+#X connect 26 0 27 0;
+#X connect 27 0 20 0;
+#X connect 28 0 33 0;
+#X connect 28 0 30 0;
+#X connect 29 0 0 0;
+#X connect 30 0 20 0;
+#X connect 31 0 34 0;
+#X connect 31 0 32 0;
+#X connect 32 0 20 0;
+#X connect 33 0 32 1;
+#X connect 35 0 6 0;
+#X connect 35 0 1 0;
+#X connect 36 0 35 0;
