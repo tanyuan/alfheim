@@ -1,6 +1,7 @@
 import nl.tue.id.oocsi.*;
 import oscP5.*;
 import netP5.*;
+import processing.io.*;
 
 // **************************************************
 // This examples requires a running OOCSI server!
@@ -21,11 +22,13 @@ int beats = 0;
 int fps = 60;
 
 void setup() {
+  GPIO.pinMode(3, GPIO.OUTPUT);
+  GPIO.pinMode(4, GPIO.OUTPUT);
   frameRate(fps);
   size(200, 200);
   noStroke();
 
-  OOCSI oocsi = new OOCSI(this, "receiver1", "localhost");
+  OOCSI oocsi = new OOCSI(this, "receiver1", "192.168.0.26");
   oocsi.subscribe("pulse");
   
   oscP5 = new OscP5(this, 12000);
@@ -52,6 +55,14 @@ void draw() {
   // Play sound with Pd
   if (count == 0) {
     playSound(enable, beats);
+  }
+  if (count < period/2 ) {
+    GPIO.digitalWrite(4, GPIO.HIGH);
+    GPIO.digitalWrite(3, GPIO.LOW);
+  }
+  else {
+    GPIO.digitalWrite(4, GPIO.LOW);
+    GPIO.digitalWrite(3, GPIO.HIGH);
   }
 }
 
