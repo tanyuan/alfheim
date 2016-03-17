@@ -10,6 +10,7 @@ import netP5.*;
 // **************************************************
 
 OscP5 oscP5;
+int count = 0;
 
 NetAddress myRemoteLocation; 
 
@@ -35,7 +36,7 @@ void draw() {
   background(255);
   
   int period = fps*60/beats;
-  int count = frameCount % period;
+  count = frameCount % period;
   
   // Read from sender
   println("ENABLE:", enable);
@@ -51,6 +52,10 @@ void draw() {
   if (count == 0) {
     playSound(enable, beats);
   }
+}
+
+void pulse(OOCSIEvent event) {
+  count = 0;
 }
 
 void handleOOCSIEvent(OOCSIEvent event) {
