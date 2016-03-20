@@ -11,11 +11,14 @@ import netP5.*;
 
 OscP5 oscP5;
 int count = 0;
+int counts = 0;
 
 NetAddress myRemoteLocation; 
 
+boolean sync = false;
+
 boolean enable = false;
-int beats = 0;
+int beats = 60;
 
 // frames per second
 int fps = 60;
@@ -26,6 +29,7 @@ void setup() {
   noStroke();
 
   OOCSI oocsi = new OOCSI(this, "receiver3", "localhost");
+  oocsi.subscribe("pulse");
   
   oscP5 = new OscP5(this, 14000);
   myRemoteLocation = new NetAddress("127.0.0.1", 14001);
@@ -35,27 +39,46 @@ void setup() {
 void draw() {
   background(255);
   
+  counts += 1;
+  
   int period = fps*60/beats;
-  count = frameCount % period;
+  count = counts % period;
+  
+  if (sync) {
+    background(0);
+    count = 0;
+    counts = 0;
+    sync = false;
+  }
   
   // Read from sender
   println("ENABLE:", enable);
   println("BEATS:", beats);
-  
-  // Double blinking
-  fill(int(float(count)/period*255));
-  ellipse(60, 100, 20, 20);
-  fill(int((1-float(count)/period)*255));
-  ellipse(140, 100, 20, 20);
  
   // Play sound with Pd
   if (count == 0) {
     playSound(enable, beats);
   }
+  if (count < period/2 ) {
+    fill(0);
+    ellipse(60, 100, 20, 20);
+    fill(128);
+    ellipse(140, 100, 20, 20);
+    //GPIO.digitalWrite(4, GPIO.HIGH);
+    //GPIO.digitalWrite(3, GPIO.LOW);
+  }
+  else {
+    fill(128);
+    ellipse(60, 100, 20, 20);
+    fill(0);
+    ellipse(140, 100, 20, 20);
+    //GPIO.digitalWrite(4, GPIO.LOW);
+    //GPIO.digitalWrite(3, GPIO.HIGH);
+  }
 }
 
 void pulse(OOCSIEvent event) {
-  count = 0;
+  sync = true;
 }
 
 void handleOOCSIEvent(OOCSIEvent event) {

@@ -1,7 +1,7 @@
 import nl.tue.id.oocsi.*;
 import oscP5.*;
 import netP5.*;
-import processing.io.*;
+//import processing.io.*;
 
 // **************************************************
 // This examples requires a running OOCSI server!
@@ -12,23 +12,26 @@ import processing.io.*;
 
 OscP5 oscP5;
 int count = 0;
+int counts = 0;
 
 NetAddress myRemoteLocation; 
 
+boolean sync = false;
+
 boolean enable = false;
-int beats = 0;
+int beats = 60;
 
 // frames per second
 int fps = 60;
 
 void setup() {
-  GPIO.pinMode(3, GPIO.OUTPUT);
-  GPIO.pinMode(4, GPIO.OUTPUT);
+  //GPIO.pinMode(3, GPIO.OUTPUT);
+  //GPIO.pinMode(4, GPIO.OUTPUT);
   frameRate(fps);
   size(200, 200);
   noStroke();
 
-  OOCSI oocsi = new OOCSI(this, "receiver1", "192.168.0.26");
+  OOCSI oocsi = new OOCSI(this, "receiver1", "localhost");
   oocsi.subscribe("pulse");
   
   oscP5 = new OscP5(this, 12000);
@@ -39,35 +42,46 @@ void setup() {
 void draw() {
   background(255);
   
+  counts += 1;
+  
   int period = fps*60/beats;
-  count = frameCount % period;
+  count = counts % period;
+  
+  if (sync) {
+    background(0);
+    count = 0;
+    counts = 0;
+    sync = false;
+  }
   
   // Read from sender
   println("ENABLE:", enable);
   println("BEATS:", beats);
-  
-  // Double blinking
-  fill(int(float(count)/period*255));
-  ellipse(60, 100, 20, 20);
-  fill(int((1-float(count)/period)*255));
-  ellipse(140, 100, 20, 20);
  
   // Play sound with Pd
   if (count == 0) {
     playSound(enable, beats);
   }
   if (count < period/2 ) {
-    GPIO.digitalWrite(4, GPIO.HIGH);
-    GPIO.digitalWrite(3, GPIO.LOW);
+    fill(0);
+    ellipse(60, 100, 20, 20);
+    fill(128);
+    ellipse(140, 100, 20, 20);
+    //GPIO.digitalWrite(4, GPIO.HIGH);
+    //GPIO.digitalWrite(3, GPIO.LOW);
   }
   else {
-    GPIO.digitalWrite(4, GPIO.LOW);
-    GPIO.digitalWrite(3, GPIO.HIGH);
+    fill(128);
+    ellipse(60, 100, 20, 20);
+    fill(0);
+    ellipse(140, 100, 20, 20);
+    //GPIO.digitalWrite(4, GPIO.LOW);
+    //GPIO.digitalWrite(3, GPIO.HIGH);
   }
 }
 
 void pulse(OOCSIEvent event) {
-  count = 0;
+  sync = true;
 }
 
 void handleOOCSIEvent(OOCSIEvent event) {

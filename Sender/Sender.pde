@@ -29,7 +29,6 @@ boolean group = false;
 void setup() {
   size(800, 400);
   background(120);
-  frameRate(10);
   noStroke();
 
   // connect ot OOCSI server running on the same machine (localhost)
@@ -64,6 +63,8 @@ void draw() {
 
     // If all beats are the same, then send out a pulse to align all signals
     if (beats1 == avg && beats2 == avg && beats3 == avg) {
+      group = false;
+      cp5.getController("group").setValue(0);
       oocsi
         .channel("pulse")
         .data("bang", "")
@@ -75,9 +76,8 @@ void draw() {
     }
   }
 
-  //object1.cp5.getController("beats1").setValue(beats1);
-
   // sending out information to system
+  
   oocsi
     .channel("receiver1")
     .data("enable", enable1)
