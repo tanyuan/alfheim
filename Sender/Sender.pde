@@ -24,6 +24,10 @@ boolean enable1 = false;
 boolean enable2 = false;
 boolean enable3 = false;
 
+int [] pattern1 = { 1, 0, 1, 1, 0, 0 };
+int [] pattern2 = { 1, 0, 1, 0, 1, 0 };
+int [] pattern3 = { 1, 1, 1, 0, 0, 0 };
+
 boolean group = false;
 
 void setup() {
@@ -36,19 +40,22 @@ void setup() {
   // (for more information how to run an OOCSI server refer to: https://iddi.github.io/oocsi/)
   oocsi = new OOCSI(this, "senderName", "localhost");
 
-  object1 = new HiddenObject(120, 200, "enable1", "beats1", beats1, this);
-  object2 = new HiddenObject(400, 200, "enable2", "beats2", beats2, this);
-  object3 = new HiddenObject(680, 200, "enable3", "beats3", beats3, this);
+  object1 = new HiddenObject(120, 200, "enable1", "beats1", beats1, pattern1, this);
+  object2 = new HiddenObject(400, 200, "enable2", "beats2", beats2, pattern2, this);
+  object3 = new HiddenObject(680, 200, "enable3", "beats3", beats3, pattern3, this);
 
   cp5 = new ControlP5(this);
   cp5.addToggle("group")
-    .setPosition(100, 300)
+    .setPosition(100, 340)
     .setSize(600, 25)
     ;
 }
 
 void draw() {
   background(200, 200, 200);
+  object1.drawUI();
+  object2.drawUI();
+  object3.drawUI();
 
   if (group) {
     //calculating the target frame rate
