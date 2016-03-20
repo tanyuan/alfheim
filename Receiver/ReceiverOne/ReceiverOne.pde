@@ -66,6 +66,8 @@ void draw() {
   ellipse(140, 100, 20, 20);
   fill(128);
   ellipse(60, 100, 20, 20);
+  //GPIO.digitalWrite(3, GPIO.LOW);
+  //GPIO.digitalWrite(4, GPIO.LOW);
 
   // Play sound with Pd
   if (count == 0) {
@@ -75,24 +77,20 @@ void draw() {
     if (pattern[patternCount] == 1)
       playSound(enable, beats);
   }
+  
+  // Show visual
   if (count < period/2 ) {
     fill(0);
     ellipse(60, 100, 20, 20);
+    //GPIO.digitalWrite(3, GPIO.HIGH);
     
     if (pattern[patternCount] == 1) {
       fill(0);
       ellipse(140, 100, 20, 20);
+      //GPIO.digitalWrite(4, GPIO.HIGH);
     }
-
-    //GPIO.digitalWrite(4, GPIO.HIGH);
-    //GPIO.digitalWrite(3, GPIO.LOW);
-  } else {
-    fill(128);
-    ellipse(60, 100, 20, 20);
-
-    //GPIO.digitalWrite(4, GPIO.LOW);
-    //GPIO.digitalWrite(3, GPIO.HIGH);
   }
+
 }
 
 void pulse(OOCSIEvent event) {
