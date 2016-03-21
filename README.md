@@ -4,6 +4,29 @@ An internet of lights and sounds project.
 
 ![Sender UI](sender.png)
 
+## Diagram
+
+```
+                          Sender
+                      +-------------+
+                      | Processing  |
+                      +-------------+
+                        |    |    |  OOCSI (Wi-fi)
+        +---------------+    |    +---------------+
+        |                    |                    |
+        v                    v                    v
+   Receiver One        Receiver Two        Receiver Three  
+ +-------------+      +-------------+      +-------------+ 
+ | Processing  |      | Processing  |      | Processing  | 
+ +-------------+      +-------------+      +-------------+ 
+        |                    |                    |        
+        v                    v                    v        
+ +-------------+      +-------------+      +-------------+ 
+ |  Pure Data  |      |  Pure Data  |      |  Pure Data  | 
+ +-------------+      +-------------+      +-------------+ 
+
+```
+
 ## Requirements
 
 - 3 Raspberry Pi's
