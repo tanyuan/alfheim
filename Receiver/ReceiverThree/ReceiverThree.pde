@@ -47,6 +47,7 @@ void draw() {
 
   counts += 1;
 
+  if (beats == 0) beats = 1;
   int period = fps*60/beats;
   count = counts % period;
 
