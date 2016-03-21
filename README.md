@@ -8,14 +8,16 @@ An internet of lights and sounds project.
 
 ```
                           Sender
+                     (PC/Raspberry Pi)
                       +-------------+
                       | Processing  |
                       +-------------+
-                        |    |    |  OOCSI (Wi-fi)
+                        |    |    |  OOCSI (Wi-Fi)
         +---------------+    |    +---------------+
         |                    |                    |
         v                    v                    v
    Receiver One        Receiver Two        Receiver Three  
+  (Raspberry Pi)      (Raspberry Pi)       (Raspberry Pi)
  +-------------+      +-------------+      +-------------+ 
  | Processing  |      | Processing  |      | Processing  | 
  +-------------+      +-------------+      +-------------+ 
@@ -29,6 +31,7 @@ An internet of lights and sounds project.
 
 ## Requirements
 
+- A PC
 - 3 Raspberry Pi's
 - Processing
   - IO
